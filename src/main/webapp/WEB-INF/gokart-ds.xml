@@ -10,7 +10,7 @@
    <datasource jndi-name="java:jboss/datasources/gokartDS"
       pool-name="{artifactId}" enabled="true"
       use-java-context="true">
-      <connection-url>jdbc:h2:mem:gokart;DB_CLOSE_DELAY=-1</connection-url>
+      <connection-url>jdbc:h2:file:~/data/gokart</connection-url>
       <driver>h2</driver>
       <security>
          <user-name>sa</user-name>

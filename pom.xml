@@ -161,7 +161,19 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
-
+		
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>4.0</version>
+		</dependency>
+		
+		<dependency>  
+		    <groupId>org.primefaces.themes</groupId>  
+		    <artifactId>all-themes</artifactId>  
+		    <version>1.0.10</version>  
+		</dependency> 
+		
     </dependencies>
 
     <build>
@@ -206,6 +218,13 @@
             <!-- Seperate profiles are provided for running all tests, including 
                 Arquillian tests that execute in the specified container -->
             <id>default</id>
+            <repositories>
+            	<repository>
+            		<id>prime-repo</id>
+            		<name>PrimeFaces Maven Repository</name>
+            		<url>http://repository.primefaces.org</url>
+            	</repository>
+            </repositories>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>

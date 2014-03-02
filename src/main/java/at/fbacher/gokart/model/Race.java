@@ -3,14 +3,30 @@ package at.fbacher.gokart.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+@NamedQueries({
+	@NamedQuery(name="Race.findAll",query="SELECT r FROM Race r ORDER BY r.date")
+})
+@Entity
 public class Race {
 	
+	public static final String findAll = "Race.findAll";
+	
+	@GeneratedValue
+	@Id
 	private long id;
 	private String name;
 	private String location;
 	private Date date;
+	@OneToMany
 	private List<Driver> confirmedDrivers;
 	private RaceStatus status;
+	@OneToMany(mappedBy = "race")
 	private List<RaceResult> rankings;
 	
 	public enum RaceStatus {UPCOMING, COMPLETED, CANCELLED }

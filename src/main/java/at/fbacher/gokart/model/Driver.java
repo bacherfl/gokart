@@ -2,8 +2,24 @@ package at.fbacher.gokart.model;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+
+@NamedQueries({
+	@NamedQuery(name="Driver.findAll",query="SELECT d FROM Driver d ORDER BY d.lastName")
+})
+
+@Entity
 public class Driver {
 	
+	public static final String findAll = "Driver.findAll";
+	
+	@GeneratedValue
+	@Id
 	private long id;
 	private String firstName;
 	private String lastName;
@@ -12,6 +28,7 @@ public class Driver {
 	private float points;
 	private PositionTrend positionTrend;
 	private String skills;
+	@OneToMany(mappedBy = "driver")
 	private List<RaceResult> raceResults;
 	private String alias;
 	private String password;
