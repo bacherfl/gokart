@@ -10,7 +10,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 @NamedQueries({
-	@NamedQuery(name="Driver.findAll",query="SELECT d FROM Driver d ORDER BY d.lastName")
+	@NamedQuery(name="Driver.findAll",query="SELECT d FROM Driver d ORDER BY d.lastName"),
+	@NamedQuery(name="Driver.findByEmail", query="SELECT d FROM Driver d WHERE d.email = :email")
 })
 
 @Entity
