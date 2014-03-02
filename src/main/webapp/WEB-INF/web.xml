@@ -8,8 +8,12 @@
 	    <param-value>bootstrap</param-value>  
 	</context-param>
 	<login-config>
-		<auth-method>BASIC</auth-method>
+		<auth-method>FORM</auth-method>
 		<realm-name>GoKart</realm-name>
+		<form-login-config>
+			<form-login-page>/login.jsf</form-login-page>
+			<form-error-page>/loginError.jsf</form-error-page>
+		</form-login-config>
 	</login-config>
 	<security-constraint>
 		<web-resource-collection>
