@@ -26,7 +26,6 @@
         <!-- <jboss.bom.version>1.0.0.M12-redhat-1</jboss.bom.version>> -->
     </properties>
 
-
     <dependencyManagement>
         <dependencies>
             <!-- JBoss distributes a complete set of Java EE 6 APIs including 
@@ -161,13 +160,29 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
-		
+		<!-- 
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>4.0</version>
+			<version>4.0-SNAPSHOT</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>mobile</artifactId>
+			<version>1.0.0-SNAPSHOT</version>	
+		</dependency>
+		-->
+		<dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>4.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces-mobile</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>		
 		<dependency>  
 		    <groupId>org.primefaces.themes</groupId>  
 		    <artifactId>all-themes</artifactId>  
@@ -223,6 +238,14 @@
             		<id>prime-repo</id>
             		<name>PrimeFaces Maven Repository</name>
             		<url>http://repository.primefaces.org</url>
+            		<releases>
+		                <enabled>true</enabled>
+		                <updatePolicy>always</updatePolicy>
+		            </releases>
+		            <snapshots>
+		                <enabled>true</enabled>
+		                <updatePolicy>always</updatePolicy>
+		            </snapshots>
             	</repository>
             </repositories>
             <activation>
