@@ -11,6 +11,6 @@
    <!-- Write your navigation rules here. You are encouraged to use CDI for 
       creating @Named managed beans. -->
 	<application>
-	<default-render-kit-id>PRIMEFACES_MOBILE</default-render-kit-id>
+		<default-render-kit-id>PRIMEFACES_MOBILE</default-render-kit-id>
 	</application>
 </faces-config>

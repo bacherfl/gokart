@@ -1,5 +1,39 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">	
+<f:view xmlns="http://www.w3.org/1999/xhtml"
+	 xmlns:f="http://java.sun.com/jsf/core"
+	 xmlns:p="http://primefaces.org/ui"
+	 xmlns:ui="http://java.sun.com/jsf/facelets"
+	 xmlns:pm="http://primefaces.org/mobile"
+	 contentType="text/html">
+	 <pm:page title="Möchtegern GoKart WM 2014">
+	 <!-- 
+	 	<f:facet name="preinit">
+	 		<link type="text/css" rel="stylesheet" 
+				 href="#{request.contextPath}/themes/gokart.css" />
+			<link type="text/css" rel="stylesheet" 
+				 href="#{request.contextPath}/themes/jquery.mobile.icons.min.css" />				 
+	 	</f:facet>
+	 -->
+	 	<pm:view id="main" swatch="c">
+	 		<pm:header title="Möchtegern GoKart WM 2014">
+	 			<f:facet name="left">
+	 				<p:button icon="bars" value="Menu" onclick="$('#navigation').panel('open')"></p:button>
+	 				
+	 			</f:facet>
+	 		</pm:header>
+			<div data-role="panel" id="navigation" data-position="left" data-display="reveal">
+				navigation items
+			</div>
+	 		<pm:content>
+	 			<ui:insert name="content">
+				[Template content will be inserted here]
+			</ui:insert>
+	 		</pm:content>
+	 	</pm:view>
+	 </pm:page> 
+</f:view>
+<!--  
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -10,6 +44,9 @@
 	<h:outputStylesheet name="css/screen.css" />
 </h:head>
 <h:body>
+	<div data-role="panel" id="navigation" data-position="left" data-display="reveal">
+		navigation items
+	</div>
 	<div id="container">
 		<div id="header">
 			<p>
@@ -27,3 +64,4 @@
 	</div>
 </h:body>
 </html>
+-->

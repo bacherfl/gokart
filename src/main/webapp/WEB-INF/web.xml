@@ -7,6 +7,12 @@
 	    <param-name>primefaces.THEME</param-name>  
 	    <param-value>bootstrap</param-value>  
 	</context-param>
+	<!-- 
+	<context-param>
+		<param-name>primefaces.mobile.THEME</param-name>
+		<param-value>none</param-value>
+	</context-param>
+	-->
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>GoKart</realm-name>
