@@ -6,20 +6,32 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
-		<form method="post" action="j_security_check">
-		<h:panelGrid columns="2" cellpadding="5">  
-            <h:outputLabel for="j_username" value="Username:" />  
-            <p:inputText name="j_username"   
-                    id="j_username" required="true" label="username" />  
-              
-            <h:outputLabel for="j_password" value="Password:" />  
-            <h:inputSecret name="j_password"   
-                    id="j_password" required="true" label="password" />  
-              
-            <f:facet name="footer">  
-                <input type="submit" value="Login" />
-            </f:facet>  
-        </h:panelGrid> 	
+		<form method="post" action="j_security_check" id="form">
+		<p:panelGrid style="">  
+			<p:row>
+				<p:column>
+					<h:outputLabel for="j_username" value="Username:" /> 
+				</p:column>
+				<p:column>
+					<h:inputText name="j_username"   
+                    id="j_username" required="true" label="" />
+				</p:column>
+			</p:row>
+            <p:row>
+            	<p:column>
+            		<h:outputLabel for="j_password" value="Password:" />
+            	</p:column>
+            	<p:column>
+            		<h:inputSecret name="j_password"   
+                    id="j_password" required="true" label="password" /> 
+            	</p:column>
+            </p:row>
+            <p:row>
+            	<p:column colspan="2">
+            		<p:button icon="check" colspan="2" name="Login" value="Login" onclick="$('#form').submit()"></p:button>
+            	</p:column>
+            </p:row>			                
+        </p:panelGrid> 	
         </form>
 	</ui:define>
 </ui:composition>
