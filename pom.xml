@@ -188,7 +188,11 @@
 		    <artifactId>all-themes</artifactId>  
 		    <version>1.0.10</version>  
 		</dependency> 
-		
+		<dependency>
+        	<groupId>org.jboss.spec.javax.servlet</groupId>
+        	<artifactId>jboss-servlet-api_3.0_spec</artifactId>
+        	<scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
