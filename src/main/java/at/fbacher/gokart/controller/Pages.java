@@ -6,6 +6,7 @@ public class Pages {
 	public static final String ADMIN_EDIT_RACE = "admin/editRace";
 	
 	/* DRIVER Actions */
+	public static final String DRIVER_HOME = "driverHome";
 	public static final String DRIVER_LIST = "driverList";
 	public static final String RACE_LIST = "raceList";
 }

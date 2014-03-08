@@ -5,31 +5,30 @@
 	 xmlns:p="http://primefaces.org/ui"
 	 xmlns:ui="http://java.sun.com/jsf/facelets"
 	 xmlns:pm="http://primefaces.org/mobile"
+	 xmlns:h="http://java.sun.com/jsf/html"
 	 contentType="text/html">
 	 <pm:page title="Möchtegern GoKart WM 2014">
-	 <!-- 
-	 	<f:facet name="preinit">
-	 		<link type="text/css" rel="stylesheet" 
-				 href="#{request.contextPath}/themes/gokart.css" />
-			<link type="text/css" rel="stylesheet" 
-				 href="#{request.contextPath}/themes/jquery.mobile.icons.min.css" />				 
-	 	</f:facet>
-	 -->
-	 	<pm:view id="main" swatch="c">
-	 		<pm:header title="Möchtegern GoKart WM 2014">
-	 			<f:facet name="left">
-	 				<p:button icon="bars" value="Menu" onclick="$('#navigation').panel('open')"></p:button>
-	 				
-	 			</f:facet>
-	 		</pm:header>
-			<div data-role="panel" id="navigation" data-position="left" data-display="reveal">
-				navigation items
-			</div>
-	 		<pm:content>
-	 			<ui:insert name="content">
-				[Template content will be inserted here]
-			</ui:insert>
-	 		</pm:content>
-	 	</pm:view>
+		 <h:form>
+		 	<pm:view id="main" swatch="a">
+		 		<pm:header title="Möchtegern GoKart WM 2014">
+		 			<f:facet name="left">
+		 				<p:button icon="bars" value="Menu" onclick="$('#navigation').panel('open')"></p:button>
+		 				
+		 			</f:facet>
+		 		</pm:header>				
+		 		<pm:content>
+		 			<ui:insert name="content">
+					[Template content will be inserted here]
+				</ui:insert>
+		 		</pm:content>
+		 		<div data-role="panel" id="navigation" data-position="left" data-display="reveal">				
+					<p:dataList>
+						<h:commandLink value="Home" action="#{navigationController.doViewHome}"/>
+		 				<h:commandLink value="Rankings" action="#{navigationController.doViewDrivers}"/>
+		 				<h:commandLink value="Races" action="#{navigationController.doViewRaces}"/>	
+					</p:dataList>				
+				</div>
+		 	</pm:view>
+		 </h:form>
 	 </pm:page> 
 </f:view>
