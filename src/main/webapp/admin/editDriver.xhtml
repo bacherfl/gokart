@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default-admin.xhtml">
+	<ui:define name="content">
+		<h1>
+			<h:outputText value="#{editDriverController.title}"/>
+		</h1>
+		<h:form>
+		<p:panel id="editDriverPanel" header="#{editDriverController.title}" >
+			<p:messages id="messages" />
+			<p:panelGrid columns="2">
+				<f:facet name="header">
+        			Driver Details
+    			</f:facet>
+				<h:outputText for="firstname" value="First Name" />
+				<p:inputText id="firstname" value="#{editDriverController.driver.firstName}" required="true"/>
+				
+				<h:outputText for="lastname" value="Last Name" />
+				<p:inputText id="lastname" value="#{editDriverController.driver.lastName}" required="true"/>
+				
+				<h:outputText for="alias" value="Alias" />
+				<p:inputText id="alias" value="#{editDriverController.driver.alias}" required="true"/>
+				
+				<h:outputText for="skills" value="Skills" />
+				<p:inputText id="skills" value="#{editDriverController.driver.skills}" required="true"/>
+				
+				<h:outputLabel for="pwd1" value="Password 1: *" />  
+            	<p:password id="pwd1" value="#{editDriverController.driver.password}" match="pwd2" label="Password 1" required="true"/>  
+  
+            	<h:outputLabel for="pwd2" value="Password 2: *" />  
+            	<p:password id="pwd2" value="#{editDriverController.driver.password}" label="Password 2" required="true"/> 
+			</p:panelGrid>
+			<p:commandButton actionListener="#{editDriverController.doSave}" value="Save Driver" icon="ui-icon-disk"/>
+		</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

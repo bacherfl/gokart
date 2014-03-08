@@ -1,15 +1,22 @@
 package at.fbacher.gokart.services;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import at.fbacher.gokart.model.Driver;
 
-public class DriverServiceBean implements IDriverService {
+@Stateless
+public class DriverServiceBean implements IDriverService, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6014441806941301200L;
 	@Inject EntityManager entityManager;
 	
 	@Override
