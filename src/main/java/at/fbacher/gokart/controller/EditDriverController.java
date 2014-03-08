@@ -2,7 +2,7 @@ package at.fbacher.gokart.controller;
 
 import java.io.Serializable;
 
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -27,8 +27,9 @@ public class EditDriverController implements Serializable {
 	private Mode mode;
 	
 	public EditDriverController() {
-		mode = Mode.ADD;
+
 	}
+	
 	
 	public void setDriverToEdit(Mode mode) {
 		setDriverToEdit(mode, new Driver());
@@ -64,12 +65,8 @@ public class EditDriverController implements Serializable {
 		this.driver = driver;
 	}
 
-	public IDriverService getDriverService() {
-		return driverService;
-	}
-
-	public void setDriverService(IDriverService driverService) {
-		this.driverService = driverService;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 	public String getTitle() {

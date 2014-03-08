@@ -7,13 +7,12 @@
 	 xmlns:pm="http://primefaces.org/mobile"
 	 xmlns:h="http://java.sun.com/jsf/html"
 	 contentType="text/html">
-	 <pm:page title="Möchtegern GoKart WM 2014">
-		 <h:form>
+	 <h:form>
+	 <pm:page title="Möchtegern GoKart WM 2014">		 
 		 	<pm:view id="main" swatch="a">
 		 		<pm:header title="Möchtegern GoKart WM 2014">
 		 			<f:facet name="left">
-		 				<p:button icon="bars" value="Menu" onclick="$('#navigation').panel('open')"></p:button>
-		 				
+		 				<p:button icon="bars" value="Menu" onclick="$('#navigation').panel('open')"></p:button>		 				
 		 			</f:facet>
 		 		</pm:header>				
 		 		<pm:content>
@@ -21,14 +20,14 @@
 					[Template content will be inserted here]
 				</ui:insert>
 		 		</pm:content>
-		 		<div data-role="panel" id="navigation" data-position="left" data-display="reveal">				
-					<p:dataList>
-						<h:commandLink value="Home" action="#{navigationController.doViewHome}"/>
-		 				<h:commandLink value="Rankings" action="#{navigationController.doViewDrivers}"/>
-		 				<h:commandLink value="Races" action="#{navigationController.doViewRaces}"/>	
-					</p:dataList>				
+		 		<div data-role="panel" id="navigation" data-position="left" data-display="reveal">		 							
+					<p:dataList>					
+						<h:commandLink value="Home" action="#{navigationController.doViewHome}" immediate="true"/>
+		 				<h:commandLink value="Rankings" action="#{navigationController.doViewDrivers}" immediate="true"/>
+		 				<h:commandLink value="Races" action="#{navigationController.doViewRaces}" immediate="true"/>		 				
+					</p:dataList>
 				</div>
 		 	</pm:view>
-		 </h:form>
-	 </pm:page> 
+	 </pm:page>
+	 </h:form> 
 </f:view>

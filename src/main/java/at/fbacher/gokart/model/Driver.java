@@ -1,5 +1,6 @@
 package at.fbacher.gokart.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -15,8 +16,13 @@ import javax.persistence.OneToMany;
 })
 
 @Entity
-public class Driver {
+public class Driver implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -635814910384161529L;
+
 	public static final String findAll = "Driver.findAll";
 	
 	@GeneratedValue

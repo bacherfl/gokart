@@ -1,15 +1,22 @@
 package at.fbacher.gokart.controller;
 
-import javax.faces.bean.RequestScoped;
+import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import at.fbacher.gokart.controller.EditDriverController.Mode;
+import at.fbacher.gokart.model.Driver;
 
-@RequestScoped
+@SessionScoped
 @Named
-public class NavigationController {
+public class NavigationController implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4162542156202778589L;
 	@Inject
 	private EditDriverController editDriverController;
 	
@@ -30,7 +37,9 @@ public class NavigationController {
 	}
 	
 	public String doAddDriver() {
-		editDriverController.setDriverToEdit(Mode.ADD);
+		Driver driver = new Driver();
+		driver.setFirstName("orschlurch");
+		editDriverController.setDriverToEdit(Mode.ADD, driver);
 		return Pages.ADMIN_EDIT_DRIVER;
 	}
 }
