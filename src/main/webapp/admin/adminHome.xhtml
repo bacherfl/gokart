@@ -6,13 +6,19 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default-admin.xhtml">
 	<ui:define name="content">
-		<h1>
-			<h:outputText value="Admin Home"/>
-		</h1>
 		<h:form>
-		<p:panel id="adminHomePanel" header="Choose an action" >
-			<h:commandButton value="Add driver" action="#{navigationController.doAddDriver()}"/>
+		<p:menubar>
+			<p:submenu label="File" icon="ui-icon-document">
+				<p:submenu label="New" icon="ui-icon-contact">
+					<p:menuitem value="Driver" action="#{navigationController.doAddDriver}" />
+				</p:submenu>
+			</p:submenu>
+		</p:menubar>
+		  
+		<p:panel id="adminHomePanel" header="Dashboard" >
+			
 		</p:panel>
+		
 		</h:form>
 	</ui:define>
 </ui:composition>

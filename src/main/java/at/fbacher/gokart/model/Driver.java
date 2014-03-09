@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 @NamedQueries({
 	@NamedQuery(name="Driver.findAll",query="SELECT d FROM Driver d ORDER BY d.lastName"),
@@ -16,12 +17,7 @@ import javax.persistence.OneToMany;
 })
 
 @Entity
-public class Driver implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -635814910384161529L;
+public class Driver {
 
 	public static final String findAll = "Driver.findAll";
 	
@@ -39,6 +35,8 @@ public class Driver implements Serializable{
 	private List<RaceResult> raceResults;
 	private String alias;
 	private String password;
+	@Transient
+	private boolean isAdmin;
 	
 	public enum PositionTrend {UP, DOWN, NIL }
 
@@ -128,6 +126,14 @@ public class Driver implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	};
 
 }

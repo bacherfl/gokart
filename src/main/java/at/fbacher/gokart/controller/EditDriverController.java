@@ -1,13 +1,20 @@
 package at.fbacher.gokart.controller;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import at.fbacher.gokart.model.Driver;
+import at.fbacher.gokart.model.UserRole;
 import at.fbacher.gokart.services.IDriverService;
+import at.fbacher.gokart.services.IUserRoleService;
+
+import org.apache.commons.codec.binary.Hex;
 
 @SessionScoped
 @Named
@@ -24,6 +31,8 @@ public class EditDriverController implements Serializable {
 	private Driver driver;
 	@Inject
 	private IDriverService driverService;
+	@Inject
+	private IUserRoleService userRoleService;
 	private Mode mode;
 	
 	public EditDriverController() {
@@ -50,7 +59,31 @@ public class EditDriverController implements Serializable {
 
 	public String doSave() {
 		if (mode == Mode.ADD) {
-			driverService.addDriver(driver);
+			MessageDigest md;
+			try {
+				md = MessageDigest.getInstance("SHA-256");
+				md.update(driver.getPassword().getBytes("UTF-8")); // Change this to "UTF-16" if needed
+				byte[] digest = md.digest();
+				driver.setPassword(Hex.encodeHexString(digest));
+				driverService.addDriver(driver);
+				
+				UserRole userRole = new UserRole();
+				userRole.setEmail(driver.getEmail());
+				userRole.setRole("driver");
+				userRoleService.addUserRole(userRole);
+				if (driver.isAdmin()) {
+					userRole = new UserRole();
+					userRole.setEmail(driver.getEmail());
+					userRole.setRole("admin");
+					userRoleService.addUserRole(userRole);
+				}
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			driverService.updateDriver(driver);
 		}

@@ -1,4 +1,8 @@
-<!-- add this to %JBOSS_HOME%/standalone/configuration/standalone.xml -->
+<!-- add this to %JBOSS_HOME%/standalone/configuration/standalone.xml 
+IMPORTANT: This solution is NOT optimal since it does not seem allow to salt passwords
+and therefore MUST NOT be used in a real application!
+Instead, a customized Login module should be used!
+-->
 <security-domain name="gokart" cache-type="default">
     <authentication>
         <login-module code="Database" flag="required">

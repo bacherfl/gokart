@@ -12,29 +12,43 @@
 		<h:form>
 		<p:panel id="editDriverPanel" header="#{editDriverController.title}" >
 			<p:messages id="messages" />
-			<p:panelGrid columns="2">
+			<p:panelGrid columns="3">
 				<f:facet name="header">
         			Driver Details
     			</f:facet>
 				<h:outputText for="firstname" value="First Name" />
 				<p:inputText id="firstname" value="#{editDriverController.driver.firstName}" required="true"/>
+				<p:message for="firstname" />
 				
 				<h:outputText for="lastname" value="Last Name" />
 				<p:inputText id="lastname" value="#{editDriverController.driver.lastName}" required="true"/>
+				<p:message for="lastname" />
+				
+				<h:outputText for="email" value="Email" />
+				<p:inputText id="email" value="#{editDriverController.driver.email}" required="true"/>
+				<p:message for="email" />
 				
 				<h:outputText for="alias" value="Alias" />
-				<p:inputText id="alias" value="#{editDriverController.driver.alias}" required="true"/>
+				<p:inputText id="alias" value="#{editDriverController.driver.alias}"/>
+				<p:message for="alias" />
 				
 				<h:outputText for="skills" value="Skills" />
-				<p:inputText id="skills" value="#{editDriverController.driver.skills}" required="true"/>
+				<p:inputText id="skills" value="#{editDriverController.driver.skills}" />
+				<p:message for="skills" />
 				
 				<h:outputLabel for="pwd1" value="Password 1: *" />  
-            	<p:password id="pwd1" value="#{editDriverController.driver.password}" match="pwd2" label="Password 1" required="true"/>  
+            	<p:password id="pwd1" value="#{editDriverController.driver.password}" match="pwd2" label="Password 1" required="true"/>
+            	<p:message for="pwd1" />  
   
             	<h:outputLabel for="pwd2" value="Password 2: *" />  
-            	<p:password id="pwd2" value="#{editDriverController.driver.password}" label="Password 2" required="true"/> 
+            	<p:password id="pwd2" value="#{editDriverController.driver.password}" label="Password 2" required="true"/>
+            	<p:message for="pwd2" />
+            	
+            	<h:outputLabel for="admin" value="Admin" />
+            	<p:selectBooleanCheckbox value="#{editDriverController.driver.admin}"/>
+            	 
 			</p:panelGrid>
-			<p:commandButton actionListener="#{editDriverController.doSave}" value="Save Driver" icon="ui-icon-disk"/>
+			<p:commandButton action="#{editDriverController.doSave}" value="Save Driver" icon="ui-icon-disk"/>
 		</p:panel>
 		</h:form>
 	</ui:define>
