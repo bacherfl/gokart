@@ -37,9 +37,7 @@ public class NavigationController implements Serializable{
 	}
 	
 	public String doAddDriver() {
-		Driver driver = new Driver();
-		driver.setFirstName("orschlurch");
-		editDriverController.setDriverToEdit(Mode.ADD, driver);
-		return Pages.ADMIN_EDIT_DRIVER;
+		editDriverController.setDriverToEdit(Mode.ADD);
+		return Pages.ADMIN_ADD_DRIVER;
 	}
 }

@@ -14,10 +14,44 @@
 				</p:submenu>
 			</p:submenu>
 		</p:menubar>
-		  
-		<p:panel id="adminHomePanel" header="Dashboard" >
-			
-		</p:panel>
+		 
+		 <p:dataTable id="driverTable" var="driver" value="#{drivers}">
+		 	<f:facet name="header">Racing Grid</f:facet>
+		 	<p:column>
+		 		<f:facet name="header">
+		 			Points
+		 		</f:facet>
+		 		<h:outputText value="#{driver.points}"></h:outputText>
+		 	</p:column>
+		 	<p:column>
+		 		<f:facet name="header">
+		 			Photo
+		 		</f:facet>
+		 		<h:graphicImage library="images" name="#{driver.photoUrl}" height="30"/>
+		 	</p:column>
+		 	<p:column>
+		 		<f:facet name="header">
+		 			Name
+		 		</f:facet>		 		
+		 		<h:outputText value="#{driver.firstName} - #{driver.alias} - #{driver.lastName}" />
+		 	</p:column>
+		 	<p:column>
+		 		<f:facet name="header">
+		 			Email
+		 		</f:facet>
+		 		<h:outputText value="#{driver.email}" />
+		 	</p:column>
+		 	<p:column>
+		 		<f:facet name="header">
+		 			Actions
+		 		</f:facet>
+		 		<p:commandButton icon="ui-icon-close" action="#{adminHomeController.doDeleteDriver(driver)}" value="Delete" update="driverTable"></p:commandButton>
+		 		<p:commandButton icon="ui-icon-disk" action="#{adminHomeController.doEditDriver(driver)}" value="Edit"></p:commandButton>
+		 	</p:column>
+		 </p:dataTable>
+		 <p:panel header="Races" id="races">
+		 
+		 </p:panel>
 		
 		</h:form>
 	</ui:define>
