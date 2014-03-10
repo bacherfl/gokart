@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default-admin.xhtml">
+	<ui:define name="content">
+		<h1>
+			<h:outputText value="#{editDriverController.title}"/>
+		</h1> 
+		<h:form enctype="multipart/form-data">
+		<p:panel id="editRacePanel" header="Add a new Race" >
+			<p:messages id="messages" />
+			<p:panelGrid columns="3" id="grid">
+				<f:facet name="header">
+        			Driver Details
+    			</f:facet>
+				<h:outputText for="name" value="Name" />
+				<p:inputText id="name" value="#{editRaceController.race.name}" required="true"/>
+				<p:message for="name" />
+				
+				<h:outputText for="date" value="Date" />
+				<p:calendar value="#{editRaceController.race.date}" mode="inline" id="date" required="true"/>
+				<p:message for="date" />
+				
+				<h:outputText for="location" value="Location"/>
+				<p:inputText id="location" value="#{editRaceController.race.location}" required="true" />
+				<p:message for="location" />
+            	 
+			</p:panelGrid>
+			<p:commandButton action="#{editRaceController.doSave}" value="Save Race" icon="ui-icon-disk" update="grid"/>
+		</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

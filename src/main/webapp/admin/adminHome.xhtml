@@ -10,47 +10,84 @@
 		<p:menubar>
 			<p:submenu label="File" icon="ui-icon-document">
 				<p:submenu label="New" icon="ui-icon-contact">
-					<p:menuitem value="Driver" action="#{navigationController.doAddDriver}" />
+					<p:menuitem value="Driver" action="#{adminHomeController.doAddDriver}" />
+					<p:menuitem value="Race" action="#{adminHomeController.doAddRace}" />
 				</p:submenu>
 			</p:submenu>
 		</p:menubar>
-		 
-		 <p:dataTable id="driverTable" var="driver" value="#{drivers}">
-		 	<f:facet name="header">Racing Grid</f:facet>
-		 	<p:column>
-		 		<f:facet name="header">
-		 			Points
-		 		</f:facet>
-		 		<h:outputText value="#{driver.points}"></h:outputText>
-		 	</p:column>
-		 	<p:column>
-		 		<f:facet name="header">
-		 			Photo
-		 		</f:facet>
-		 		<h:graphicImage library="images" name="#{driver.photoUrl}" height="30"/>
-		 	</p:column>
-		 	<p:column>
-		 		<f:facet name="header">
-		 			Name
-		 		</f:facet>		 		
-		 		<h:outputText value="#{driver.firstName} - #{driver.alias} - #{driver.lastName}" />
-		 	</p:column>
-		 	<p:column>
-		 		<f:facet name="header">
-		 			Email
-		 		</f:facet>
-		 		<h:outputText value="#{driver.email}" />
-		 	</p:column>
-		 	<p:column>
-		 		<f:facet name="header">
-		 			Actions
-		 		</f:facet>
-		 		<p:commandButton icon="ui-icon-close" action="#{adminHomeController.doDeleteDriver(driver)}" value="Delete" update="driverTable"></p:commandButton>
-		 		<p:commandButton icon="ui-icon-disk" action="#{adminHomeController.doEditDriver(driver)}" value="Edit"></p:commandButton>
-		 	</p:column>
-		 </p:dataTable>
+			<p:panel header="Drivers" id="drivers"> 
+			 	<p:dataTable id="driverTable" var="driver" value="#{drivers}">
+			 	<f:facet name="header">Racing Grid</f:facet>
+			 	<p:column>
+			 		<f:facet name="header">
+			 			Points
+			 		</f:facet>
+			 		<h:outputText value="#{driver.points}"></h:outputText>
+			 	</p:column>
+			 	<p:column>
+			 		<f:facet name="header">
+			 			Photo
+			 		</f:facet>
+			 		<h:graphicImage library="images" name="#{driver.photoUrl}" height="30"/>
+			 	</p:column>
+			 	<p:column>
+			 		<f:facet name="header">
+			 			Name
+			 		</f:facet>		 		
+			 		<h:outputText value="#{driver.firstName} - #{driver.alias} - #{driver.lastName}" />
+			 	</p:column>
+			 	<p:column>
+			 		<f:facet name="header">
+			 			Email
+			 		</f:facet>
+			 		<h:outputText value="#{driver.email}" />
+			 	</p:column>
+			 	<p:column>
+			 		<f:facet name="header">
+			 			Actions
+			 		</f:facet>
+			 		<p:commandButton icon="ui-icon-close" action="#{adminHomeController.doDeleteDriver(driver)}" value="Delete" update="driverTable"></p:commandButton>
+			 		<p:commandButton icon="ui-icon-disk" action="#{adminHomeController.doEditDriver(driver)}" value="Edit"></p:commandButton>
+			 	</p:column>
+			 </p:dataTable>
+			</p:panel>
 		 <p:panel header="Races" id="races">
-		 
+		 	<p:dataTable id="raceTable" var="race" value="#{races}">
+		 		<f:facet name="header">
+		 			Races
+		 		</f:facet>
+		 		<p:column>
+		 			<f:facet name="header">
+		 				Date
+		 			</f:facet>
+		 			<h:outputText value="#{race.date}" />
+		 		</p:column>
+		 		<p:column>
+		 			<f:facet name="header">
+		 				Name
+		 			</f:facet>
+		 			<h:outputText value="#{race.name}" />
+		 		</p:column>
+		 		<p:column>
+		 			<f:facet name="location">
+		 				Location
+		 			</f:facet>
+		 			<h:outputText value="#{race.location}" />
+		 		</p:column>
+		 		<p:column>
+		 			<f:facet name="header">
+		 				Status
+		 			</f:facet>
+		 			<h:outputText value="#{race.status}" />
+		 		</p:column>
+		 		<p:column>
+		 			<f:facet name="header">
+		 				Actions
+		 			</f:facet>
+		 			<p:commandButton icon="ui-icon-close" action="#{adminHomeController.doDeleteRace(race)}" value="Delete" update="raceTable" />
+		 			<p:commandButton icon="ui-icon-disk" action="#{adminHomeController.doEditRace(race)}" value="Edit" />
+		 		</p:column>
+		 	</p:dataTable>
 		 </p:panel>
 		
 		</h:form>

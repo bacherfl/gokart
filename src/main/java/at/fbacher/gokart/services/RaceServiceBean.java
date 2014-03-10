@@ -2,12 +2,14 @@ package at.fbacher.gokart.services;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import at.fbacher.gokart.model.Race;
 
+@Stateless
 public class RaceServiceBean implements IRaceService {
 	
 	@Inject
@@ -21,7 +23,7 @@ public class RaceServiceBean implements IRaceService {
 	@Override
 	public void deleteRace(Race race) {
 		Race managedRace = entityManager.find(Race.class, race.getId());
-		entityManager.detach(managedRace);
+		entityManager.remove(managedRace);
 	}
 
 	@Override
