@@ -1,14 +1,20 @@
 package at.fbacher.gokart.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.model.DualListModel;
+
 import at.fbacher.gokart.controller.EditDriverController.Mode;
 import at.fbacher.gokart.data.RaceListProducer;
+import at.fbacher.gokart.model.Driver;
 import at.fbacher.gokart.model.Race;
+import at.fbacher.gokart.model.RaceResult;
 
 @SessionScoped
 @Named
@@ -21,11 +27,46 @@ public class EditRaceController implements Serializable {
 
 	@Inject
 	private RaceListProducer raceListProducer;
+	@Inject 
+	List<Driver> drivers;
 	private Race race;
 	private Mode mode;
+	private DualListModel<Driver> driversAndResults;
 	
 	public EditRaceController() {
+		ArrayList<Driver> resultDrivers = initRaceResultDrivers();
+		ArrayList<Driver> availableDrivers = initAvailableDrivers(resultDrivers);	
 		
+		driversAndResults = new DualListModel<Driver>(availableDrivers, resultDrivers);
+	}
+	
+	private ArrayList<Driver> initRaceResultDrivers() {
+		ArrayList<Driver> resultDrivers = new ArrayList<Driver>();
+		if (race.getRankings() != null) {
+			for (RaceResult result : race.getRankings()) {
+				resultDrivers.add(result.getDriver());
+			}
+		}
+		return resultDrivers;
+	}
+	
+	private ArrayList<Driver> initAvailableDrivers(ArrayList<Driver> resultDrivers) {
+		ArrayList<Driver> availableDrivers = new ArrayList<Driver>();
+		if (drivers != null) {
+			for (Driver driver : drivers) {
+				boolean found = false;
+				if (!resultDrivers.isEmpty()) {
+					for (Driver tmpDriver : resultDrivers) {
+						if (driver.getEmail().equalsIgnoreCase(tmpDriver.getEmail())) 
+							found = true;
+					}
+				}
+				if (!found) {
+					availableDrivers.add(driver);
+				}
+			}
+		}
+		return availableDrivers;
 	}
 
 	public Race getRace() {
@@ -57,8 +98,22 @@ public class EditRaceController implements Serializable {
 		if (mode == Mode.ADD) {
 			raceListProducer.addRace(race);
 		} else {
+			updateRaceResults();
 			raceListProducer.updateRace(race);
 		}
 		return Pages.ADMIN_HOME;
 	}
+	
+	public DualListModel<Driver> getDriversAndResults() {
+		return driversAndResults;
+	}
+	
+	public void setDriversAndResults(DualListModel<Driver> driversAndResults) {
+		this.driversAndResults = driversAndResults;
+	}
+	
+	private void updateRaceResults() {
+		//TODO implement method
+	}
+	
 }

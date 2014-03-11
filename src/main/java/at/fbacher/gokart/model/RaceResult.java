@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class RaceResult {
+public class RaceResult implements Comparable<RaceResult>{
 	
 	@GeneratedValue
 	@Id
@@ -47,6 +47,15 @@ public class RaceResult {
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	@Override
+	public int compareTo(RaceResult o) {
+		//usually, we want to get the results in DESCENDING order, thus inverse the comparison
+		if (position > o.position)
+			return -1;
+		else if(position == o.position)
+			return 0;
+		else return 1;
 	}
 
 }

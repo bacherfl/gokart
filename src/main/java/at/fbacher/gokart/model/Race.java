@@ -1,5 +1,6 @@
 package at.fbacher.gokart.model;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -80,6 +81,7 @@ public class Race {
 	}
 
 	public List<RaceResult> getRankings() {
+		Collections.sort(rankings);
 		return rankings;
 	}
 
