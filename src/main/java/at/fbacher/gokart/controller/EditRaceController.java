@@ -34,6 +34,10 @@ public class EditRaceController implements Serializable {
 	private DualListModel<Driver> driversAndResults;
 	
 	public EditRaceController() {
+		
+	}
+	
+	private void initDriversAndResults() {
 		ArrayList<Driver> resultDrivers = initRaceResultDrivers();
 		ArrayList<Driver> availableDrivers = initAvailableDrivers(resultDrivers);	
 		
@@ -88,6 +92,7 @@ public class EditRaceController implements Serializable {
 	public void setRaceToEdit(Mode mode, Race race) {
 		this.mode = mode;
 		this.race = race;
+		initDriversAndResults();
 	}
 	
 	public void setRaceToEdit(Mode mode) {

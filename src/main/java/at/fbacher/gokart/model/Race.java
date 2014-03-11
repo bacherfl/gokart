@@ -4,7 +4,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -27,7 +29,7 @@ public class Race {
 	@OneToMany
 	private List<Driver> confirmedDrivers;
 	private RaceStatus status;
-	@OneToMany(mappedBy = "race")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "race", cascade = CascadeType.ALL)
 	private List<RaceResult> rankings;
 	
 	public enum RaceStatus {UPCOMING, COMPLETED, CANCELLED }
@@ -81,7 +83,10 @@ public class Race {
 	}
 
 	public List<RaceResult> getRankings() {
-		Collections.sort(rankings);
+		if (rankings != null) {
+			Collections.sort(rankings);
+		}
+		
 		return rankings;
 	}
 

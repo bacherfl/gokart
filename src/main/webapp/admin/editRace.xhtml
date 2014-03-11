@@ -7,7 +7,7 @@
 	template="/WEB-INF/templates/default-admin.xhtml">
 	<ui:define name="content">
 		<h1>
-			<h:outputText value="#Add a new Race"/>
+			<h:outputText value="Edit Race #{editRaceController.race.name}"/>
 		</h1> 
 		<h:form enctype="multipart/form-data">
 		<p:panel id="editRacePanel" header="Add a new Race" >
@@ -26,9 +26,20 @@
 				
 				<h:outputText for="location" value="Location"/>
 				<p:inputText id="location" value="#{editRaceController.race.location}" required="true" />
-				<p:message for="location" />
-            	 
+				<p:message for="location" /> 	 
 			</p:panelGrid>
+			<p:pickList id="resultPickList" value="#{editRaceController.driversAndResults}" var="driver" effect="bounce"
+					itemValue="#{driver}" itemLabel="#{driver.firstName} #{driver.lastName}" 
+					showSourceControls="true" showTargetControls="true" showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
+					
+					<f:facet name="sourceCaption">Available</f:facet>
+					<f:facet name="targetCaption">Positions</f:facet>
+					
+					<p:column style="width: 25%">
+						<h:graphicImage library="images" name="#{driver.photoUrl}" height="30"/> #{driver.firstName} #{driver.lastName}
+					</p:column>
+				
+				</p:pickList>
 			<p:commandButton action="#{editRaceController.doSave}" value="Save Race" icon="ui-icon-disk" update="grid"/>
 		</p:panel>
 		</h:form>
