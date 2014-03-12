@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,6 +16,7 @@ import at.fbacher.gokart.data.RaceListProducer;
 import at.fbacher.gokart.model.Driver;
 import at.fbacher.gokart.model.Race;
 import at.fbacher.gokart.model.RaceResult;
+import at.fbacher.gokart.util.Events.Added;
 
 @SessionScoped
 @Named
@@ -32,6 +34,8 @@ public class EditRaceController implements Serializable {
 	private Race race;
 	private Mode mode;
 	private DualListModel<Driver> driversAndResults;
+	@Inject @Added
+	private Event<RaceResult> raceResultAddedEvent;
 	
 	public EditRaceController() {
 		
@@ -118,7 +122,18 @@ public class EditRaceController implements Serializable {
 	}
 	
 	private void updateRaceResults() {
-		//TODO implement method
+		List<RaceResult> results = new ArrayList<RaceResult>();
+		int i = 1;
+		//TODO implement a converter for the picklist to get Driver objects from target list
+		for (Driver driver : driversAndResults.getTarget()) {
+			RaceResult result = new RaceResult();
+			result.setRace(race);
+			result.setDriver(driver);
+			result.setPosition(i++);
+			results.add(result);
+			raceResultAddedEvent.fire(result);
+		}
+		race.setRankings(results);
 	}
 	
 }

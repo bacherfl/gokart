@@ -4,12 +4,15 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
+import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import at.fbacher.gokart.model.Driver;
+import at.fbacher.gokart.model.RaceResult;
 import at.fbacher.gokart.services.IDriverService;
+import at.fbacher.gokart.util.Events.Added;
 
 @SessionScoped
 @Named

@@ -3,7 +3,9 @@ package at.fbacher.gokart.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
@@ -31,7 +33,7 @@ public class Driver {
 	private float points;
 	private PositionTrend positionTrend;
 	private String skills;
-	@OneToMany(mappedBy = "driver")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "driver", cascade = CascadeType.ALL)
 	private List<RaceResult> raceResults;
 	private String alias;
 	private String password;
@@ -81,6 +83,12 @@ public class Driver {
 	}
 
 	public float getPoints() {
+		points = 0;
+		if (getRaceResults() != null) {
+			for (RaceResult raceResult : getRaceResults()) {
+				points += raceResult.getPoints();
+			}
+		}
 		return points;
 	}
 

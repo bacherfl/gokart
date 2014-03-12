@@ -35,7 +35,22 @@ public class RaceResult implements Comparable<RaceResult>{
 	}
 	public void setPosition(int position) {
 		this.position = position;
+		switch (position) {
+			case 1: setPoints(25.0f); break;
+			case 2: setPoints(18.0f); break;
+			case 3: setPoints(15.0f); break;
+			case 4: setPoints(12.0f); break;
+			case 5: setPoints(10.0f); break;
+			case 6: setPoints(8.0f); break;
+			case 7: setPoints(6.0f); break;
+			case 8: setPoints(4.0f); break;
+			case 9: setPoints(2.0f); break;
+			case 10: setPoints(1.0f); break;
+			default: setPoints(0.0f); break;
+		}
 	}
+	
+	
 	public float getPoints() {
 		return points;
 	}
