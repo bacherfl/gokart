@@ -29,7 +29,7 @@ public class Race {
 	@OneToMany
 	private List<Driver> confirmedDrivers;
 	private RaceStatus status;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "race", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "race")
 	private List<RaceResult> rankings;
 	
 	public enum RaceStatus {UPCOMING, COMPLETED, CANCELLED }

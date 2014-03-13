@@ -29,7 +29,7 @@
 				<p:message for="location" /> 	 
 			</p:panelGrid>
 			<p:pickList id="resultPickList" value="#{editRaceController.driversAndResults}" var="driver" effect="bounce"
-					itemValue="#{driver}" itemLabel="#{driver.firstName} #{driver.lastName}" 
+					itemValue="#{driver}" itemLabel="#{driver.firstName} #{driver.lastName}" converter="primeFacesPickListConverter"
 					showSourceControls="true" showTargetControls="true" showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
 					
 					<f:facet name="sourceCaption">Available</f:facet>

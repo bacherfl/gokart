@@ -33,7 +33,7 @@ public class Driver {
 	private float points;
 	private PositionTrend positionTrend;
 	private String skills;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "driver", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "driver")
 	private List<RaceResult> raceResults;
 	private String alias;
 	private String password;

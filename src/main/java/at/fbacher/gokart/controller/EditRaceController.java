@@ -16,6 +16,7 @@ import at.fbacher.gokart.data.RaceListProducer;
 import at.fbacher.gokart.model.Driver;
 import at.fbacher.gokart.model.Race;
 import at.fbacher.gokart.model.RaceResult;
+import at.fbacher.gokart.services.IRaceResultService;
 import at.fbacher.gokart.util.Events.Added;
 
 @SessionScoped
@@ -29,6 +30,8 @@ public class EditRaceController implements Serializable {
 
 	@Inject
 	private RaceListProducer raceListProducer;
+	@Inject
+	private IRaceResultService raceResultService;
 	@Inject 
 	List<Driver> drivers;
 	private Race race;
@@ -109,6 +112,9 @@ public class EditRaceController implements Serializable {
 		} else {
 			updateRaceResults();
 			raceListProducer.updateRace(race);
+			for (RaceResult raceResult : race.getRankings()) {
+				raceResultService.addRaceResult(raceResult);
+			}
 		}
 		return Pages.ADMIN_HOME;
 	}
@@ -122,6 +128,11 @@ public class EditRaceController implements Serializable {
 	}
 	
 	private void updateRaceResults() {
+		List<RaceResult> rankings = race.getRankings();
+		for (RaceResult raceResult : rankings) {
+			raceResultService.deleteRaceResult(raceResult);
+		}
+		race.getRankings().clear();
 		List<RaceResult> results = new ArrayList<RaceResult>();
 		int i = 1;
 		//TODO implement a converter for the picklist to get Driver objects from target list
