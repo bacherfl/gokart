@@ -99,5 +99,13 @@ public class Race {
 		return new SimpleDateFormat("dd.MM.yyyy").format(date).toString();
 	}
 	
+	public String getStatusFormatted() {
+		switch (status) {
+			case UPCOMING: return "upcoming";
+			case CANCELLED: return "cancelled";
+			case COMPLETED: return "completed";
+			default: return "";
+		}
+	}
 	
 }

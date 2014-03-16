@@ -40,7 +40,7 @@ public class RaceListProducer {
 				return null;
 			}
 		}
-		else return new Race();
+		else return null;
 	}
 	
 	public void addRace(Race race) {

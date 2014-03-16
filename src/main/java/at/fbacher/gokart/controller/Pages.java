@@ -13,4 +13,5 @@ public class Pages {
 	public static final String DRIVER_LIST = "/drivers/driverList";
 	public static final String RACE_LIST = "/drivers/raceList";
 	public static final String VIEW_DRIVER = "/drivers/viewDriver";
+	public static final String VIEW_RACE = "/drivers/viewRace";
 }
