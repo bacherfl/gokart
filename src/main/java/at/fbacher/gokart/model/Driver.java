@@ -1,6 +1,5 @@
 package at.fbacher.gokart.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,9 +18,10 @@ import javax.persistence.Transient;
 })
 
 @Entity
-public class Driver {
+public class Driver implements Comparable<Driver>{
 
 	public static final String findAll = "Driver.findAll";
+	public static final String findByEmail = "Driver.findByEmail";
 	
 	@GeneratedValue
 	@Id
@@ -142,6 +142,24 @@ public class Driver {
 
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	@Override
+	public int compareTo(Driver o) {
+		if (getPoints() < o.getPoints()) {
+			return -1;
+		} else if (getPoints() == o.getPoints()) {
+			return 0;
+		} else return 1;
 	};
+	
+	@Override
+	public boolean equals(Object object) {
+		boolean sameValue = false;
+		if (object != null && object instanceof Driver) {
+			sameValue = email.equalsIgnoreCase(((Driver)object).getEmail());
+		}
+		return sameValue;
+	}
 
 }

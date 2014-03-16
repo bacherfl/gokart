@@ -9,7 +9,8 @@ public class Pages {
 	public static final String ADMIN_HOME = "/admin/adminHome";
 	
 	/* DRIVER Actions */
-	public static final String DRIVER_HOME = "driverHome";
-	public static final String DRIVER_LIST = "driverList";
-	public static final String RACE_LIST = "raceList";
+	public static final String DRIVER_HOME = "/drivers/driverHome";
+	public static final String DRIVER_LIST = "/drivers/driverList";
+	public static final String RACE_LIST = "/drivers/raceList";
+	public static final String VIEW_DRIVER = "/drivers/viewDriver";
 }

@@ -41,4 +41,12 @@ public class DriverServiceBean implements IDriverService, Serializable {
 		return query.getResultList();
 	}
 
+	@Override
+	public Driver getDriver(String email) {
+		TypedQuery<Driver> query = entityManager.createNamedQuery(Driver.findByEmail, Driver.class);
+		query.setParameter("email", email);
+		
+		return query.getResultList().get(0);
+	}
+
 }

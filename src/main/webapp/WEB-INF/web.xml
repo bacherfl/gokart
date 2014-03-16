@@ -35,6 +35,16 @@
 			<role-name>admin</role-name>
 		</auth-constraint>
 	</security-constraint>
+	 
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/drivers/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>driver</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
 	<security-role>
 		<role-name>admin</role-name>
 	</security-role>

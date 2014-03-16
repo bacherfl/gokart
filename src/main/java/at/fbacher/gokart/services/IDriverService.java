@@ -10,5 +10,6 @@ public interface IDriverService {
 	public void deleteDriver(Driver driver);
 	public void updateDriver(Driver driver);
 	public List<Driver> getDrivers();
+	public Driver getDriver(String email);
 	
 }

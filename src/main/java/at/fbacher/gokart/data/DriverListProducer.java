@@ -1,6 +1,7 @@
 package at.fbacher.gokart.data;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import javax.enterprise.context.SessionScoped;
@@ -34,11 +35,28 @@ public class DriverListProducer implements Serializable {
 	@Produces
 	@Named
 	public List<Driver> getDrivers() {
-		return driverService.getDrivers();
+		List<Driver> drivers = driverService.getDrivers();
+		if (drivers != null) {
+			Collections.sort(drivers);
+		}
+		return drivers;
 	}
 
 	public void setDrivers(List<Driver> drivers) {
 		this.drivers = drivers;
+	}
+	
+	public int getDriverPosition(Driver driver) {
+		int result = 1;
+		List<Driver> drivers = getDrivers();
+		if (drivers != null) {
+			for (Driver cmpDriver : drivers) {
+				if (cmpDriver.getEmail().equalsIgnoreCase(driver.getEmail())) 
+					return result;
+				result++;
+			}
+		}
+		return result;
 	}
 
 }

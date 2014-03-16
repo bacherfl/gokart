@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<p:outputPanel style="font-size: 24px;">#{viewDriverController.driver.firstName} #{viewDriverController.driver.lastName}</p:outputPanel>
+		<p:panelGrid columns="2" style="margin-top: 15px;">
+			<h:graphicImage library="images" name="#{viewDriverController.driver.photoUrl}" height="80" width="80"/>
+			<p:outputPanel>
+				<p:panelGrid columns="1" style="margin-left:0px;">
+					<p:outputLabel style="font-size: 20px; position: top;">Ranking: #{driverListProducer.getDriverPosition(viewDriverController.driver)}</p:outputLabel> 
+					<p:outputLabel>Points: #{driverHomeController.driver.points}</p:outputLabel>
+				</p:panelGrid>				
+			</p:outputPanel>
+		</p:panelGrid>
+	
+		<p:panel header="Race Results">
+			<p:dataList value="#{viewDriverController.driver.raceResults}" var="result">
+				<p:column>
+					<p:outputLabel style="font-size: 14px;">#{result.race.location}, #{result.race.getDateFormatted()}</p:outputLabel>
+					<h:outputText styleClass="ui-li-count" value="#{result.position}"></h:outputText>
+				</p:column>		
+			</p:dataList>
+		</p:panel>
+			
+		
+	</ui:define>
+</ui:composition>

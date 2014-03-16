@@ -1,5 +1,6 @@
 package at.fbacher.gokart.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Race {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "race")
 	private List<RaceResult> rankings;
 	
-	public enum RaceStatus {UPCOMING, COMPLETED, CANCELLED }
+	public enum RaceStatus { UPCOMING, COMPLETED, CANCELLED }
 
 	public long getId() {
 		return id;
@@ -92,6 +93,10 @@ public class Race {
 
 	public void setRankings(List<RaceResult> rankings) {
 		this.rankings = rankings;
+	}
+	
+	public String getDateFormatted() {
+		return new SimpleDateFormat("dd.MM.yyyy").format(date).toString();
 	}
 	
 	

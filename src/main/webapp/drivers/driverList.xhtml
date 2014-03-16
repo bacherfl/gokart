@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		
+		<p:dataList value="#{drivers}" var="driver">
+			<p:column>
+				<p:commandLink action="#{driverListController.doViewDriver(driver)}" ajax="false">
+					<h:graphicImage library="images" name="#{driver.photoUrl}" height="80"/>
+					<p:outputLabel style="font-size: 14px; position: absolute; top: 34px;">#{driver.firstName} #{driver.lastName}</p:outputLabel>
+					<h:outputText styleClass="ui-li-count" value="#{driver.points}"></h:outputText>
+				</p:commandLink>				
+			</p:column>			
+		</p:dataList>
+		
+		
+	</ui:define>
+</ui:composition>

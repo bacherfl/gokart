@@ -28,6 +28,21 @@ public class RaceListProducer {
 		return raceService.getRaces();
 	}
 	
+	@Produces
+	@Named
+	public Race getNextRace() {
+		List<Race> races = getRaces();
+		if (!races.isEmpty()) {
+			Race nextRace = races.get(0);
+			if (nextRace.getStatus() == RaceStatus.UPCOMING) {
+				return races.get(0);
+			} else {
+				return null;
+			}
+		}
+		else return new Race();
+	}
+	
 	public void addRace(Race race) {
 		race.setStatus(RaceStatus.UPCOMING);
 		raceService.addRace(race);
