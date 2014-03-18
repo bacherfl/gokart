@@ -8,15 +8,15 @@
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
 		<p:outputPanel style="font-size: 24px;">#{viewDriverController.driver.firstName} #{viewDriverController.driver.lastName}</p:outputPanel>
-		<p:panelGrid columns="2" style="margin-top: 15px;">
-			<h:graphicImage library="images" name="#{viewDriverController.driver.photoUrl}" height="80" width="80"/>
+		<h:panelGrid columns="2" style="margin-top: 15px;">
+			<h:graphicImage library="images" name="#{driverHomeController.driver.photoUrl}" height="130" width="130"/>
 			<p:outputPanel>
-				<p:panelGrid columns="1" style="margin-left:0px;">
-					<p:outputLabel style="font-size: 20px; position: top;">Ranking: #{driverListProducer.getDriverPosition(viewDriverController.driver)}</p:outputLabel> 
-					<p:outputLabel>Points: #{driverHomeController.driver.points}</p:outputLabel>
-				</p:panelGrid>				
+				<h:panelGrid columns="1" style="margin-left:0px;">
+					<h:outputLabel style="font-size: 20px; position: top;">Ranking: #{driverListProducer.getDriverPosition(driverHomeController.driver)}</h:outputLabel> 
+					<h:outputLabel>Points: #{driverHomeController.driver.points}</h:outputLabel>
+				</h:panelGrid>				
 			</p:outputPanel>
-		</p:panelGrid>
+		</h:panelGrid>
 	
 		<p:panel header="Race Results">
 			<p:dataList value="#{viewDriverController.driver.raceResults}" var="result">

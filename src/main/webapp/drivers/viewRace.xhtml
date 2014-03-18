@@ -7,6 +7,19 @@
 	xmlns:pm="http://primefaces.org/mobile"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="content">
+		<p:outputPanel style="font-size: 24px;">#{viewRaceController.race.location}, #{viewRaceController.race.getDateFormatted()}</p:outputPanel>
+		
+		
+		<p:panel header="Race Results">
+		<!-- 
+			<p:dataList value="#{viewDriverController.driver.raceResults}" var="result">
+				<p:column>
+					<p:outputLabel style="font-size: 14px;">#{result.race.location}, #{result.race.getDateFormatted()}</p:outputLabel>
+					<h:outputText styleClass="ui-li-count" value="#{result.position}"></h:outputText>
+				</p:column>		
+			</p:dataList>
+			-->
+		</p:panel>
 			
 		
 	</ui:define>
