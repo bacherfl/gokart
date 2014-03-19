@@ -9,6 +9,7 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.model.DualListModel;
 
 import at.fbacher.gokart.controller.EditDriverController.Mode;
@@ -17,6 +18,7 @@ import at.fbacher.gokart.model.Driver;
 import at.fbacher.gokart.model.Race;
 import at.fbacher.gokart.model.RaceResult;
 import at.fbacher.gokart.services.IRaceResultService;
+import at.fbacher.gokart.services.RaceServiceBean;
 import at.fbacher.gokart.util.Events.Added;
 
 @SessionScoped
@@ -43,42 +45,6 @@ public class EditRaceController implements Serializable {
 	public EditRaceController() {
 		
 	}
-	
-	private void initDriversAndResults() {
-		ArrayList<Driver> resultDrivers = initRaceResultDrivers();
-		ArrayList<Driver> availableDrivers = initAvailableDrivers(resultDrivers);	
-		
-		driversAndResults = new DualListModel<Driver>(availableDrivers, resultDrivers);
-	}
-	
-	private ArrayList<Driver> initRaceResultDrivers() {
-		ArrayList<Driver> resultDrivers = new ArrayList<Driver>();
-		if (race.getRankings() != null) {
-			for (RaceResult result : race.getRankings()) {
-				resultDrivers.add(result.getDriver());
-			}
-		}
-		return resultDrivers;
-	}
-	
-	private ArrayList<Driver> initAvailableDrivers(ArrayList<Driver> resultDrivers) {
-		ArrayList<Driver> availableDrivers = new ArrayList<Driver>();
-		if (drivers != null) {
-			for (Driver driver : drivers) {
-				boolean found = false;
-				if (!resultDrivers.isEmpty()) {
-					for (Driver tmpDriver : resultDrivers) {
-						if (driver.getEmail().equalsIgnoreCase(tmpDriver.getEmail())) 
-							found = true;
-					}
-				}
-				if (!found) {
-					availableDrivers.add(driver);
-				}
-			}
-		}
-		return availableDrivers;
-	}
 
 	public Race getRace() {
 		return race;
@@ -99,7 +65,6 @@ public class EditRaceController implements Serializable {
 	public void setRaceToEdit(Mode mode, Race race) {
 		this.mode = mode;
 		this.race = race;
-		initDriversAndResults();
 	}
 	
 	public void setRaceToEdit(Mode mode) {
@@ -110,11 +75,11 @@ public class EditRaceController implements Serializable {
 		if (mode == Mode.ADD) {
 			raceListProducer.addRace(race);
 		} else {
-			updateRaceResults();
+			//updateRaceResults();
 			raceListProducer.updateRace(race);
-			for (RaceResult raceResult : race.getRankings()) {
-				raceResultService.addRaceResult(raceResult);
-			}
+			
+
+			
 		}
 		return Pages.ADMIN_HOME;
 	}
@@ -127,24 +92,27 @@ public class EditRaceController implements Serializable {
 		this.driversAndResults = driversAndResults;
 	}
 	
-	private void updateRaceResults() {
-		List<RaceResult> rankings = race.getRankings();
-		for (RaceResult raceResult : rankings) {
-			raceResultService.deleteRaceResult(raceResult);
+	public void addResult() {
+		RaceResult raceResult = new RaceResult();
+		int position = race.getRankings().size() + 1;
+		raceResult.setPosition(position);
+		raceResult.setRace(race);
+		race.getRankings().add(raceResult);
+		raceResultService.addRaceResult(raceResult);
+		raceListProducer.updateRace(race);
+	}
+	
+	public void onResultEdit(RowEditEvent event) {
+		RaceResult result = (RaceResult) event.getObject();
+		raceResultService.updateRaceResult(result);
+		
+		//TODO check if this is necessary
+		for (RaceResult tmpResult : race.getRankings()) {
+			if (tmpResult.getPosition() == result.getPosition()) {
+				tmpResult = result;
+			}
 		}
-		race.getRankings().clear();
-		List<RaceResult> results = new ArrayList<RaceResult>();
-		int i = 1;
-		//TODO implement a converter for the picklist to get Driver objects from target list
-		for (Driver driver : driversAndResults.getTarget()) {
-			RaceResult result = new RaceResult();
-			result.setRace(race);
-			result.setDriver(driver);
-			result.setPosition(i++);
-			results.add(result);
-			raceResultAddedEvent.fire(result);
-		}
-		race.setRankings(results);
+		
 	}
 	
 }

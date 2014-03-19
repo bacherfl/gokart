@@ -23,14 +23,15 @@ public class RaceResultServiceBean implements IRaceResultService {
 	@Override
 	public void deleteRaceResult(RaceResult raceResult) {
 		RaceResult managedRaceResult = entityManager.find(RaceResult.class, raceResult.getId());
-		entityManager.remove(managedRaceResult);
-		entityManager.flush();
+		if (managedRaceResult != null) {
+			entityManager.remove(managedRaceResult);
+			entityManager.flush();
+		}
 	}
 
 	@Override
 	public void updateRaceResult(RaceResult raceResult) {
-		// TODO
-
+		entityManager.merge(raceResult);
 	}
 
 	@Override

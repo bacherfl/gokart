@@ -17,6 +17,8 @@ public class RaceResult implements Comparable<RaceResult>{
 	private Driver driver;
 	private int position;
 	private float points;
+	private float avgLapTime;
+	private float bestLapTime;
 	
 	public Race getRace() {
 		return race;
@@ -72,5 +74,16 @@ public class RaceResult implements Comparable<RaceResult>{
 			return 0;
 		else return 1;
 	}
-
+	public float getAvgLapTime() {
+		return avgLapTime;
+	}
+	public void setAvgLapTime(float avgLapTime) {
+		this.avgLapTime = avgLapTime;
+	}
+	public float getBestLapTime() {
+		return bestLapTime;
+	}
+	public void setBestLapTime(float bestLapTime) {
+		this.bestLapTime = bestLapTime;
+	}	
 }

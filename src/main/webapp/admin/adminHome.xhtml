@@ -85,7 +85,7 @@
 		 				Actions
 		 			</f:facet>
 		 			<p:commandButton icon="ui-icon-close" action="#{adminHomeController.doDeleteRace(race)}" value="Delete" update="raceTable" />
-		 			<p:commandButton icon="ui-icon-disk" action="#{adminHomeController.doEditRace(race)}" value="Edit" />
+		 			<p:commandButton icon="ui-icon-disk" action="#{adminHomeController.doEditRace(race)}" value="Edit" ajax="false"/>
 		 		</p:column>
 		 	</p:dataTable>
 		 </p:panel>

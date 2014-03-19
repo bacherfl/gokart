@@ -28,18 +28,53 @@
 				<p:inputText id="location" value="#{editRaceController.race.location}" required="true" />
 				<p:message for="location" /> 	 
 			</p:panelGrid>
-			<p:pickList id="resultPickList" value="#{editRaceController.driversAndResults}" var="driver" effect="bounce"
-					itemValue="#{driver}" itemLabel="#{driver.firstName} #{driver.lastName}" converter="primeFacesPickListConverter"
-					showSourceControls="true" showTargetControls="true" showSourceFilter="true" showTargetFilter="true" filterMatchMode="contains">
-					
-					<f:facet name="sourceCaption">Available</f:facet>
-					<f:facet name="targetCaption">Positions</f:facet>
-					
-					<p:column style="width: 25%">
-						<h:graphicImage library="images" name="#{driver.photoUrl}" height="30"/> #{driver.firstName} #{driver.lastName}
-					</p:column>
-				
-				</p:pickList>
+			
+			<p:dataTable var="result" value="#{editRaceController.race.rankings}" id="race1Results" editable="true">
+				<f:facet name="header">
+					Race 1 Rankings
+				</f:facet>	
+				<p:ajax event="rowEdit" listener="#{editRaceController.onResultEdit}"></p:ajax>			
+				<p:column headerText="Driver" style="width:25%;">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{result.driver.firstName} #{result.driver.lastName}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu value="#{result.driver}" converter="#{driverConverter}">
+								<f:selectItems value="#{drivers}" var="driver" itemLabel="#{driver.firstName} #{driver.lastName}" itemValue="#{driver}"></f:selectItems>
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>				
+				<p:column headerText="Best Lap" style="width:25%;">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{result.bestLapTime}"></h:outputText>
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{result.bestLapTime}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Avg Lap" style="width:22%;">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{result.avgLapTime}"></h:outputText>
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{result.avgLapTime}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Best Lap" style="width:22%;">
+					<h:outputText value="#{result.points}" />
+				</p:column>
+				<p:column style="width:6%">  
+		            <p:rowEditor />  
+		        </p:column>
+			</p:dataTable>
+			
+			<p:commandButton action="#{editRaceController.addResult}" value="Add Result" icon="ui-icon-plus" update="race1Results"/>
 			<p:commandButton action="#{editRaceController.doSave}" value="Save Race" icon="ui-icon-disk" update="grid"/>
 		</p:panel>
 		</h:form>
