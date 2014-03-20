@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -32,8 +33,6 @@ public class Race {
 	private RaceStatus status;
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "race")
 	private List<RaceResult> rankings;
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "race")
-	private List<RaceResult> rankings2;
 	
 	public enum RaceStatus { UPCOMING, COMPLETED, CANCELLED }
 
@@ -108,14 +107,5 @@ public class Race {
 			case COMPLETED: return "completed";
 			default: return "";
 		}
-	}
-
-	public List<RaceResult> getRankings2() {
-		return rankings2;
-	}
-
-	public void setRankings2(List<RaceResult> rankings2) {
-		this.rankings2 = rankings2;
-	}
-	
+	}	
 }

@@ -12,16 +12,16 @@
 		<h:form enctype="multipart/form-data">
 		<p:panel id="editRacePanel" header="Add a new Race" >
 			<p:messages id="messages" />
-			<p:panelGrid columns="3" id="grid">
+			<p:panelGrid columns="3" id="grid" style="width: 50%;">
 				<f:facet name="header">
-        			Driver Details
+        			Race Details
     			</f:facet>
 				<h:outputText for="name" value="Name" />
 				<p:inputText id="name" value="#{editRaceController.race.name}" required="true"/>
 				<p:message for="name" />
 				
 				<h:outputText for="date" value="Date" />
-				<p:calendar value="#{editRaceController.race.date}" mode="inline" id="date" required="true"/>
+				<p:calendar value="#{editRaceController.race.date}" mode="inline" id="date" required="true" style="width: 100%;"/>
 				<p:message for="date" />
 				
 				<h:outputText for="location" value="Location"/>
@@ -34,7 +34,7 @@
 					Race 1 Rankings
 				</f:facet>	
 				<p:ajax event="rowEdit" listener="#{editRaceController.onResultEdit}"></p:ajax>			
-				<p:column headerText="Driver" style="width:25%;">
+				<p:column headerText="Driver">
 					<p:cellEditor>
 						<f:facet name="output">
 							<h:outputText value="#{result.driver.firstName} #{result.driver.lastName}" />
@@ -45,8 +45,18 @@
 							</p:selectOneMenu>
 						</f:facet>
 					</p:cellEditor>
+				</p:column>								
+				<p:column headerText="Position 1">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{result.position}"></h:outputText>
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{result.position}" />
+						</f:facet>
+					</p:cellEditor>
 				</p:column>				
-				<p:column headerText="Best Lap" style="width:25%;">
+				<p:column headerText="Best Lap 1">
 					<p:cellEditor>
 						<f:facet name="output">
 							<h:outputText value="#{result.bestLapTime}"></h:outputText>
@@ -56,7 +66,7 @@
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
-				<p:column headerText="Avg Lap" style="width:22%;">
+				<p:column headerText="Avg Lap 1">
 					<p:cellEditor>
 						<f:facet name="output">
 							<h:outputText value="#{result.avgLapTime}"></h:outputText>
@@ -66,15 +76,45 @@
 						</f:facet>
 					</p:cellEditor>
 				</p:column>
-				<p:column headerText="Best Lap" style="width:22%;">
+				<p:column headerText="Position 2">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{result.position2}"></h:outputText>
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{result.position2}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>	
+				<p:column headerText="Best Lap 2">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{result.bestLapTime2}"></h:outputText>
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{result.bestLapTime2}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Avg Lap 2">
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{result.avgLapTime2}"></h:outputText>
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{result.avgLapTime2}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column headerText="Points">
 					<h:outputText value="#{result.points}" />
 				</p:column>
-				<p:column style="width:6%">  
+				<p:column>  
 		            <p:rowEditor />  
 		        </p:column>
 			</p:dataTable>
-			
 			<p:commandButton action="#{editRaceController.addResult}" value="Add Result" icon="ui-icon-plus" update="race1Results"/>
+			
 			<p:commandButton action="#{editRaceController.doSave}" value="Save Race" icon="ui-icon-disk" update="grid"/>
 		</p:panel>
 		</h:form>

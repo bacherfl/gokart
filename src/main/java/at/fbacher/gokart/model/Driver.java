@@ -149,6 +149,7 @@ public class Driver implements Comparable<Driver>{
 		if (getPoints() < o.getPoints()) {
 			return -1;
 		} else if (getPoints() == o.getPoints()) {
+			//TODO implement secondary comparison based on race positions
 			return 0;
 		} else return 1;
 	};

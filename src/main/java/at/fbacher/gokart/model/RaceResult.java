@@ -15,11 +15,33 @@ public class RaceResult implements Comparable<RaceResult>{
 	private Race race;
 	@ManyToOne
 	private Driver driver;
-	private int position;
+	private int position = 0;
+	private int position2 = 0;
 	private float points;
 	private float avgLapTime;
+	private float avgLapTime2;
 	private float bestLapTime;
+	private float bestLapTime2;
 	
+	public int getPosition2() {
+		return position2;
+	}
+	public void setPosition2(int position2) {
+		this.position2 = position2;
+		updatePoints();
+	}
+	public float getAvgLapTime2() {
+		return avgLapTime2;
+	}
+	public void setAvgLapTime2(float avgLapTime2) {
+		this.avgLapTime2 = avgLapTime2;
+	}
+	public float getBestLapTime2() {
+		return bestLapTime2;
+	}
+	public void setBestLapTime2(float bestLapTime2) {
+		this.bestLapTime2 = bestLapTime2;
+	}
 	public Race getRace() {
 		return race;
 	}
@@ -37,19 +59,7 @@ public class RaceResult implements Comparable<RaceResult>{
 	}
 	public void setPosition(int position) {
 		this.position = position;
-		switch (position) {
-			case 1: setPoints(25.0f); break;
-			case 2: setPoints(18.0f); break;
-			case 3: setPoints(15.0f); break;
-			case 4: setPoints(12.0f); break;
-			case 5: setPoints(10.0f); break;
-			case 6: setPoints(8.0f); break;
-			case 7: setPoints(6.0f); break;
-			case 8: setPoints(4.0f); break;
-			case 9: setPoints(2.0f); break;
-			case 10: setPoints(1.0f); break;
-			default: setPoints(0.0f); break;
-		}
+		updatePoints();
 	}
 	
 	
@@ -68,11 +78,27 @@ public class RaceResult implements Comparable<RaceResult>{
 	@Override
 	public int compareTo(RaceResult o) {
 		//usually, we want to get the results in DESCENDING order, thus inverse the comparison
-		if (position > o.position)
+		if (points > o.getPoints())
 			return -1;
-		else if(position == o.position)
-			return 0;
+		else if(position == o.getPoints()) {
+			return compareSecondary(o);
+		}
 		else return 1;
+	}
+	private int compareSecondary(RaceResult o) {
+		int myBestPosition = Math.min(position2, position);
+		int otherBestPosition = Math.min(o.getPosition(), o.getPosition2());
+		
+		if (myBestPosition < otherBestPosition)
+			return -1;
+		
+		int myWorsePosition = Math.max(position, position2);
+		int otherWorstPosition = Math.max(o.getPosition(), o.getPosition2());
+		
+		if (myWorsePosition < otherWorstPosition)
+			return 1;
+		
+		return 0;
 	}
 	public float getAvgLapTime() {
 		return avgLapTime;
@@ -85,5 +111,25 @@ public class RaceResult implements Comparable<RaceResult>{
 	}
 	public void setBestLapTime(float bestLapTime) {
 		this.bestLapTime = bestLapTime;
-	}	
+	}
+	
+	private float getPointsForPoisition(int position) {
+		switch (position) {
+			case 1: return 12.5f; 
+			case 2: return 9.0f;
+			case 3: return 7.5f; 
+			case 4: return 6.0f; 
+			case 5: return 5.0f;
+			case 6: return 4.0f;
+			case 7: return 3.0f;
+			case 8: return 2.0f;
+			case 9: return 1.0f;
+			case 10: return 0.5f;
+			default: return 0.0f;
+		}
+	}
+	
+	private void updatePoints() {
+		points = getPointsForPoisition(position) + getPointsForPoisition(position2);
+	}
 }

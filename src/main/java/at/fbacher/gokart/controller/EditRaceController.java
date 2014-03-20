@@ -94,8 +94,6 @@ public class EditRaceController implements Serializable {
 	
 	public void addResult() {
 		RaceResult raceResult = new RaceResult();
-		int position = race.getRankings().size() + 1;
-		raceResult.setPosition(position);
 		raceResult.setRace(race);
 		race.getRankings().add(raceResult);
 		raceResultService.addRaceResult(raceResult);
@@ -111,8 +109,6 @@ public class EditRaceController implements Serializable {
 			if (tmpResult.getPosition() == result.getPosition()) {
 				tmpResult = result;
 			}
-		}
-		
-	}
-	
+		}		
+	}	
 }

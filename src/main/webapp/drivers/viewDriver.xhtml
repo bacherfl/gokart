@@ -20,10 +20,11 @@
 	
 		<p:panel header="Race Results">
 			<p:dataList value="#{viewDriverController.driver.raceResults}" var="result">
-				<p:column>
-					<p:outputLabel style="font-size: 14px;">#{result.race.location}, #{result.race.getDateFormatted()}</p:outputLabel>
-					<h:outputText styleClass="ui-li-count" value="#{result.position}"></h:outputText>
-				</p:column>		
+					<p:outputLabel>#{result.race.location}, #{result.race.getDateFormatted()}</p:outputLabel>
+					<h:outputText styleClass="ui-li-count" value="Points: #{result.points}"></h:outputText>	
+					<br /><br />
+					<h:outputText value="Race 1: " /><h:outputText value="#{result.position}"></h:outputText> <br />
+					<h:outputText value="Race 2: " /><h:outputText value="#{result.position2}"></h:outputText>						
 			</p:dataList>
 		</p:panel>
 			

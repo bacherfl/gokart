@@ -134,7 +134,7 @@ public class EditDriverController implements Serializable {
 	public void copyFile(String fileName, InputStream in) {
 		try { 
 	         // write the inputStream to a FileOutputStream
-			File file = new File("../standalone/deployments/gokart.war/resources/images/" + fileName);
+			File file = new File("../gokart-data/images/" + fileName);
 			System.out.println(file.getAbsolutePath());
 	         OutputStream out = new FileOutputStream(file);
 	      
